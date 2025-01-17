@@ -8,13 +8,15 @@ function addFriend() {
 
 
     if(inputField.value.trim() !== '' && nameValidation.test(inputField.value)) {
-        friendsList.push(inputField.value)
-
-        console.log('nome adicionado com sucesso!')
-        console.log(friendsList)
-
-        updateList()
-        inputField.value = ''
+        if (!friendsList.includes(inputField.value.trim())){
+            friendsList.push(inputField.value.trim())
+            console.log('nome adicionado com sucesso!')
+            console.log(friendsList)
+            updateList()
+            inputField.value = ''
+        } else {
+            alert('Este nome já foi adicionado.')
+        }
     } else {
         alert('Por favor, insira um nome válido.')
     }
@@ -29,6 +31,7 @@ document.getElementById('friend').addEventListener('keydown', (e)=> {
 function updateList(){
     const ul = document.getElementById('friendList')
     ul.innerHTML = ''
+    
     friendsList.forEach(name => {
         const li = document.createElement('li')
         li.textContent = name
