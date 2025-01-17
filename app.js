@@ -14,10 +14,17 @@ function addFriend() {
         console.log(friendsList)
 
         updateList()
+        inputField.value = ''
     } else {
         alert('Por favor, insira um nome válido.')
     }
 }
+
+document.getElementById('friend').addEventListener('keydown', (e)=> {
+    if (e.key === 'Enter') {
+        addFriend()
+    }
+})
 
 function updateList(){
     const ul = document.getElementById('friendList')
@@ -27,4 +34,15 @@ function updateList(){
         li.textContent = name
         ul.appendChild(li)
     })
+}
+
+function selectFriendRandom(){
+    if (friendsList.length > 0) {
+        const index = Math.floor(Math.random() * friendsList.length)
+        const randomFriend = friendsList[index]
+
+        alert(`Amigo selecionado: ${randomFriend}`)
+    } else {
+        alert('A lista de amigos está vazia.')
+    }
 }
