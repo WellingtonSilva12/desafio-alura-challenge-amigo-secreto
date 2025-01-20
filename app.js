@@ -7,8 +7,8 @@ function addFriend() {
     const nameValidation = /^[a-zA-ZÀ-ÿ ]+$/;
 
 
-    if(inputField.value.trim() !== '' && nameValidation.test(inputField.value)) {
-        if (!friendsList.includes(inputField.value.trim())){
+    if (inputField.value.trim() !== '' && nameValidation.test(inputField.value)) {
+        if (!friendsList.includes(inputField.value.trim())) {
             friendsList.push(inputField.value.trim())
             console.log('nome adicionado com sucesso!')
             console.log(friendsList)
@@ -22,16 +22,16 @@ function addFriend() {
     }
 }
 
-document.getElementById('friend').addEventListener('keydown', (e)=> {
+document.getElementById('friend').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         addFriend()
     }
 })
 
-function updateList(){
+function updateList() {
     const ul = document.getElementById('friendList')
     ul.innerHTML = ''
-    
+
     friendsList.forEach(name => {
         const li = document.createElement('li')
         li.textContent = name
@@ -39,11 +39,15 @@ function updateList(){
     })
 }
 
-function selectFriendRandom(){
+function selectFriendRandom() {
     if (friendsList.length > 0) {
         const index = Math.floor(Math.random() * friendsList.length)
         const randomFriend = friendsList[index]
 
+        friendsList.splice(index, 1);
+
+        updateList();
+        console.log(friendsList)
         alert(`Amigo selecionado: ${randomFriend}`)
     } else {
         alert('A lista de amigos está vazia.')
